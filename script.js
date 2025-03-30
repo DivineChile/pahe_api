@@ -1,3 +1,4 @@
+const API_URL = 'https://your-api-endpoint.com/api';
 document.addEventListener('DOMContentLoaded', function() {
     // Load featured anime on homepage
     loadFeaturedAnime();
@@ -80,7 +81,7 @@ function loadFeaturedAnime() {
 
 // Search anime function
 function searchAnime(query) {
-    fetch(`http://127.0.0.1:5000/search/${encodeURIComponent(query)}`)
+    fetch(`${API_URL}/search/${encodeURIComponent(query)}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -117,7 +118,7 @@ function createAnimeCard(anime) {
     animeCard.className = 'anime-card';
     
     animeCard.innerHTML = `
-        <img src="http://localhost:5000/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
+        <img src="${API_URL}/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
         <div class="anime-info">
             <h3 class="anime-title">${anime.title}</h3>
             <div class="anime-meta">
@@ -133,7 +134,7 @@ function createAnimeCard(anime) {
 
 // View anime details
 function viewAnimeDetails(sessionId) {
-    fetch(`http://127.0.0.1:5000/anime/${sessionId}`)
+    fetch(`${API_URL}/anime/${sessionId}`)
         .then(response => response.json())
         .then(anime => {
             // Create anime details HTML
@@ -244,7 +245,7 @@ function viewAnimeDetails(sessionId) {
 
 // Load episodes for anime
 function loadEpisodes(sessionId, page) {
-    fetch(`http://127.0.0.1:5000/episodes/${sessionId}/page=${page}`)
+    fetch(`${API_URL}/episodes/${sessionId}/page=${page}`)
         .then(response => response.json())
         .then(data => {
             const episodesList = document.getElementById('episodes-list');
@@ -311,7 +312,7 @@ function loadEpisodes(sessionId, page) {
 
 // Show episode options (stream/download)
 function showEpisodeOptions(animeSessionId, episodeSession, episodeNumber) {
-    fetch(`http://127.0.0.1:5000/download/${animeSessionId}/${episodeSession}`)
+    fetch(`${API_URL}/download/${animeSessionId}/${episodeSession}`)
         .then(response => response.json())
         .then(data => {
             const modalBody = document.getElementById('modal-body');
