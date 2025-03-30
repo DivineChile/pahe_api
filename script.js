@@ -81,7 +81,7 @@ function loadFeaturedAnime() {
 
 // Search anime function
 function searchAnime(query) {
-    fetch(`${API_URL}/search/${encodeURIComponent(query)}`)
+    fetch(`/search/${encodeURIComponent(query)}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -118,7 +118,7 @@ function createAnimeCard(anime) {
     animeCard.className = 'anime-card';
     
     animeCard.innerHTML = `
-        <img src="${API_URL}/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
+        <img src="/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
         <div class="anime-info">
             <h3 class="anime-title">${anime.title}</h3>
             <div class="anime-meta">
@@ -245,7 +245,7 @@ function viewAnimeDetails(sessionId) {
 
 // Load episodes for anime
 function loadEpisodes(sessionId, page) {
-    fetch(`${API_URL}/episodes/${sessionId}/page=${page}`)
+    fetch(`/episodes/${sessionId}/page=${page}`)
         .then(response => response.json())
         .then(data => {
             const episodesList = document.getElementById('episodes-list');
@@ -312,7 +312,7 @@ function loadEpisodes(sessionId, page) {
 
 // Show episode options (stream/download)
 function showEpisodeOptions(animeSessionId, episodeSession, episodeNumber) {
-    fetch(`${API_URL}/download/${animeSessionId}/${episodeSession}`)
+    fetch(`/download/${animeSessionId}/${episodeSession}`)
         .then(response => response.json())
         .then(data => {
             const modalBody = document.getElementById('modal-body');
