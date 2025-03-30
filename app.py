@@ -127,7 +127,7 @@ def index():
         }
     })'''
 
-@app.route('/frontend')
+@app.route('/')
 def frontend():
     return send_file('index.html')
     
