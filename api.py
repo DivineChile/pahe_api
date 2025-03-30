@@ -104,10 +104,6 @@ def step_1(data, key, load, seperator):
         r'action="([^\"]+)" method="POST"><input type="hidden" name="_token"\s+value="([^\"]+)', payload
     )[0]
     return payload
-
-@app.route('/frontend')
-def frontend():
-    return send_file('index.html')
     
 
 def get_dl_link(link: str):
