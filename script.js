@@ -81,7 +81,7 @@ function loadFeaturedAnime() {
 
 // Search anime function
 function searchAnime(query) {
-    fetch(`/search/${encodeURIComponent(query)}`)
+    fetch(`https://pahe-api.onrender.com/search/${encodeURIComponent(query)}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -118,7 +118,7 @@ function createAnimeCard(anime) {
     animeCard.className = 'anime-card';
     
     animeCard.innerHTML = `
-        <img src="/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
+        <img src="https://pahe-api.onrender.com/proxy-image?url=${encodeURIComponent(anime.poster)}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Poster'">
         <div class="anime-info">
             <h3 class="anime-title">${anime.title}</h3>
             <div class="anime-meta">
@@ -134,7 +134,7 @@ function createAnimeCard(anime) {
 
 // View anime details
 function viewAnimeDetails(sessionId) {
-    fetch(`${API_URL}/anime/${sessionId}`)
+    fetch(`https://pahe-api.onrender.com/anime/${sessionId}`)
         .then(response => response.json())
         .then(anime => {
             // Create anime details HTML
@@ -245,7 +245,7 @@ function viewAnimeDetails(sessionId) {
 
 // Load episodes for anime
 function loadEpisodes(sessionId, page) {
-    fetch(`/episodes/${sessionId}/page=${page}`)
+    fetch(`https://pahe-api.onrender.com/episodes/${sessionId}/page=${page}`)
         .then(response => response.json())
         .then(data => {
             const episodesList = document.getElementById('episodes-list');
@@ -312,7 +312,7 @@ function loadEpisodes(sessionId, page) {
 
 // Show episode options (stream/download)
 function showEpisodeOptions(animeSessionId, episodeSession, episodeNumber) {
-    fetch(`/download/${animeSessionId}/${episodeSession}`)
+    fetch(`https://pahe-api.onrender.com/download/${animeSessionId}/${episodeSession}`)
         .then(response => response.json())
         .then(data => {
             const modalBody = document.getElementById('modal-body');
