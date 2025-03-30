@@ -115,7 +115,7 @@ def get_dl_link(link: str):
     resp = s.post(url=url, data=data, headers=headers, allow_redirects=False)
     return resp.headers["location"]
 
-'''@app.route('/')
+@app.route('/')
 def index():
     return jsonify({
         "message": f"Anime Pahe API [MADE BY RAHAT]",
@@ -125,11 +125,8 @@ def index():
             "/anime/<session_id>": "Get anime details",
             "/search/<query>": "Search for anime"
         }
-    })'''
+    })
 
-@app.route('/')
-def frontend():
-    return send_file('index.html')
     
 
 @app.route('/search/<query>')
