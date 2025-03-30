@@ -1,5 +1,5 @@
 import os
-from flask import send_from_directory
+from flask import send_from_directory, send_file
 from flask import Flask, jsonify, request
 from bs4 import BeautifulSoup
 import requests
@@ -104,6 +104,11 @@ def step_1(data, key, load, seperator):
         r'action="([^\"]+)" method="POST"><input type="hidden" name="_token"\s+value="([^\"]+)', payload
     )[0]
     return payload
+
+@app.route('/frontend')
+def frontend():
+    return send_file('index.html')
+    
 
 def get_dl_link(link: str):
     resp = s.get(link)
