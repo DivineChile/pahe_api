@@ -1,4 +1,4 @@
-const API_URL = 'https://your-api-endpoint.com/api';
+const API_URL = 'https://pahe-api.onrender.com';
 document.addEventListener('DOMContentLoaded', function() {
     // Load featured anime on homepage
     loadFeaturedAnime();
