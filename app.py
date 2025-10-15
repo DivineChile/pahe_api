@@ -34,7 +34,7 @@ def proxy_image():
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Referer': 'https://animepahe.ru/'
+            'Referer': 'https://animepahe.si/'
         }
         
         response = requests.get(image_url, headers=headers, stream=True)
@@ -52,7 +52,7 @@ def proxy_image():
 # Global session for requests
 session = requests.Session()
 session.headers.update({
-    'authority': 'animepahe.ru',
+    'authority': 'animepahe.si',
     'accept': 'application/json, text/javascript, */*; q=0.01',
     'accept-language': 'en-US,en;q=0.9',
     'cookie': '__ddg2_=;',
@@ -64,7 +64,7 @@ session.headers.update({
     'sec-fetch-mode': 'cors',
     'sec-fetch-site': 'same-origin',
     'x-requested-with': 'XMLHttpRequest',
-    'referer': 'https://animepahe.ru',
+    'referer': 'https://animepahe.si',
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
 })
 
@@ -132,7 +132,7 @@ def index():
 @app.route('/search/<query>')
 def search_anime(query):
     """Search for anime on AnimePahe"""
-    search_url = f"https://animepahe.ru/api?m=search&q={query.replace(' ', '+')}"
+    search_url = f"https://animepahe.si/api?m=search&q={query.replace(' ', '+')}"
     try:
         response = session.get(search_url).json()
         if response['total'] == 0:
@@ -165,7 +165,7 @@ def search_anime(query):
 @app.route('/anime/<session_id>')
 def get_anime_details(session_id):
     """Get details for a specific anime"""
-    anime_url = f"https://animepahe.ru/anime/{session_id}"
+    anime_url = f"https://animepahe.si/anime/{session_id}"
     try:
         response = session.get(anime_url)
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -259,7 +259,7 @@ def get_anime_details(session_id):
 @app.route('/episodes/<session_id>/page=<page>')
 def get_episodes(session_id, page):
     """Get list of episodes for an anime"""
-    episodes_url = f"https://animepahe.ru/api?m=release&id={session_id}&sort=episode_asc&page={page}"
+    episodes_url = f"https://animepahe.si/api?m=release&id={session_id}&sort=episode_asc&page={page}"
     
     try:
         response = session.get(episodes_url).json()
@@ -271,7 +271,7 @@ def get_episodes(session_id, page):
         
         for ep in response['data']:
             ep_session = ep['session']
-            ep_url = f"https://animepahe.ru/play/{session_id}/{ep_session}"
+            ep_url = f"https://animepahe.si/play/{session_id}/{ep_session}"
             episodes.append({
                 "page": current_page,
                 "id": ep['id'],
@@ -299,7 +299,7 @@ def get_episodes(session_id, page):
 @app.route('/download/<session_id>/<episode_session>')
 def get_download_links(session_id, episode_session):
     """Get download links for a specific episode with direct download URLs"""
-    episode_url = f"https://animepahe.ru/play/{session_id}/{episode_session}"
+    episode_url = f"https://animepahe.si/play/{session_id}/{episode_session}"
     
     
     try:
