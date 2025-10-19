@@ -377,11 +377,11 @@ def extract_kwik_link(url):
 
         script_tags = soup.find_all('script', type="text/javascript")
         for script in script_tags:            
-            match = re.search(r'https://kwik\.si/f/[\w\d]+', script.text)
+            match = re.search(r'https://kwik\.cx/f/[\w\d]+', script.text)
             if match:
                 return match.group(0)
         
-        return "No kwik.si link found in the page."
+        return "No kwik.cx link found in the page."
     
     except Exception as e:
         return f"Error extracting kwik link: {str(e)}"
